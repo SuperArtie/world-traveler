@@ -1,0 +1,22 @@
+extends ../shared/template
+block content
+  #map
+  .row
+    .col-xs-9
+      table.table.table-striped.table-hover
+        thead
+          th Name
+          th Start
+          th End
+          th Latitude
+          th Longitude
+        tbody
+          each vacation in vacations
+           tr(data-name=vacation.name, data-lat=vacation.lat, data-lng=vacation.lng)
+             td: a(href='vacations/#{vacation._id}')= vacation.name
+             td= moment(vacation.start).format('dddd, MMM Do YYYY')
+             td= moment(vacation.end).format('dddd, MMM Do YYYY')
+             td= vacation.lat
+             td= vacation.lng
+block scripts
+  script(src='/js/user/vacIndex.js')

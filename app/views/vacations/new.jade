@@ -1,0 +1,18 @@
+extends ../shared/template
+block content
+  h2 New Vacation
+  .row
+    .col-xs-4
+      form(role='form' method='post' action='/vacations')
+        input#lat(name='lat' type='hidden')
+        input#lng(name='lng' type='hidden')
+        label(for='name') Vacation name
+        input.form-control#name(name='name' type='text' autofocus=true)
+        label(for='start') Start date
+        input.form-control#start(name='start' type='date')
+        label(for='end') End date
+        input.form-control#end(name='end' type='date')
+        button.btn.btn-primary(type='submit') Add Vacation!
+    .col-xs-8
+block scripts
+  script(src='/js/user/vacations.js')

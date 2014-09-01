@@ -1,0 +1,44 @@
+extends ../shared/template
+block content
+  .col-xs-6
+    #map2
+  .col-xs-6
+    h2= vacation.name
+    .row
+      .col-xs-1
+      .col-xs-10
+        table.table.table-striped.table-hover
+          thead
+            th Start
+            th End
+            th Latitude
+            th Longitude
+            th Photos
+          tbody
+            tr(data-name=vacation.name, data-lat=vacation.lat, data-lng=vacation.lng)
+              td= moment(vacation.start).format('dddd, MMM Do YYYY')
+              td= moment(vacation.end).format('dddd, MMM Do YYYY')
+              td= vacation.lat
+              td= vacation.lng
+              td= vacation.photos.length
+    .row
+      .col-xs-1
+      .col-xs-8
+        form(method='post' action='/vacations/#{vacation._id}/photos/download')
+          label(for='photo') Photo URL
+          input.form-control#photo(name='photo' type='text' autofocus=true)
+          button.btn.btn-primary(type='submit') Add photo
+    .row
+      .col-xs-1
+      .col-xs-8
+        form(method='post' action='/vacations/#{vacation._id}/photos/upload' enctype='multipart/form-data')
+          label(for='photo') Photos
+          input.form-control#photos(name='photos' type='file' multiple=true)
+          button.btn.btn-primary(type='submit') Add photos
+    .row
+      .col-xs-1
+      .col-xs-8
+        each photo in vacation.photos
+          .photo: img(src='#{photo}')
+block scripts
+  script(src='/js/user/vacShow.js')
